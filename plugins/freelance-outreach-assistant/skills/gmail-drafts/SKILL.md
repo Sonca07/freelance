@@ -7,7 +7,7 @@ description: Prepare Gmail-ready draft artifacts for a separate freelance Gmail 
 
 ## Principle
 
-Separate the freelance operation from Readymind. Use the configured freelance Gmail identity from `crm/outreach_config.example.json`, then generate draft files or connector drafts only after the user approves the account.
+Separate the freelance operation from Readymind. Use the configured freelance Gmail identity from `crm/outreach_config.local.json`, then generate draft files or connector drafts only after the user approves the account.
 
 ## Without Gmail Connector
 
@@ -25,4 +25,4 @@ If a Gmail tool is installed and the user explicitly asks to create Gmail drafts
 
 ## Account Setup Checklist
 
-Create the Gmail account manually, update `sender_name`, `sender_email`, `signature`, demo links, and optional `calendar_link` in the config before real outreach.
+Create the Gmail account manually, update `sender_name`, `sender_email`, `signature`, demo links, and optional `calendar_link` in the local config before real outreach. Never store the Gmail password in repo files.

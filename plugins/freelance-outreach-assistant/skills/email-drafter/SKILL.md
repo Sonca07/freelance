@@ -19,10 +19,10 @@ description: Draft safe first-contact and follow-up emails for freelance outreac
 Use:
 
 ```powershell
-python plugins\freelance-outreach-assistant\scripts\draft_emails.py crm\leads_scored.csv --config crm\outreach_config.example.json --output-dir outputs\drafts --limit 10
+python plugins\freelance-outreach-assistant\scripts\draft_emails.py crm\leads_scored.csv --config crm\outreach_config.local.json --output-dir outputs\drafts --limit 10
 ```
 
-Outputs are `.txt`, `.eml`, and `drafts_index.csv`. The script prints `No email was sent.`
+Outputs are `.txt`, `.eml`, and `drafts_index.csv`. The script prints `No email was sent.` Keep `crm/outreach_config.local.json` out of Git.
 
 ## Sequence Mapping
 

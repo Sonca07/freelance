@@ -10,7 +10,7 @@ from outreach_lib import due_actions, load_config, load_csv, write_drafts
 def main() -> int:
     parser = argparse.ArgumentParser(description="Create safe email draft files without sending anything.")
     parser.add_argument("crm", type=Path)
-    parser.add_argument("--config", type=Path, default=Path("crm/outreach_config.example.json"))
+    parser.add_argument("--config", type=Path, default=Path("crm/outreach_config.local.json"))
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/drafts"))
     parser.add_argument("--date", default=dt.date.today().isoformat(), help="Target date in YYYY-MM-DD format.")
     parser.add_argument("--limit", type=int, default=10)

@@ -3,3 +3,6 @@ outputs/*
 __pycache__/
 *.pyc
 .pytest_cache/
+crm/outreach_config.local.json
+.env
+.env.*
