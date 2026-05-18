@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lead Research"
+  short_description: "Find and qualify public local leads"
+  default_prompt: "Use $lead-research to build AMBA booking-system leads."
+
+policy:
+  allow_implicit_invocation: true

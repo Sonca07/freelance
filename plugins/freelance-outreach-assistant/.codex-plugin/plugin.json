@@ -1,0 +1,39 @@
+{
+  "name": "freelance-outreach-assistant",
+  "version": "0.1.0",
+  "description": "Local Codex tools for safe freelance outreach: lead research, CRM maintenance, email drafting, and daily follow-up planning.",
+  "author": {
+    "name": "Local Freelance Workspace",
+    "email": "replace-with-your-freelance-gmail@example.com",
+    "url": "https://example.com/freelance-outreach-assistant"
+  },
+  "homepage": "https://example.com/freelance-outreach-assistant",
+  "repository": "https://example.com/local/freelance-outreach-assistant",
+  "license": "UNLICENSED",
+  "keywords": [
+    "freelance",
+    "outreach",
+    "gmail",
+    "crm",
+    "lead-generation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Freelance Outreach Assistant",
+    "shortDescription": "Research leads, draft emails, and plan follow-ups safely.",
+    "longDescription": "A repo-local assistant for validating a freelance outreach operation with a separate Gmail identity. It helps Codex research public leads, score opportunities, create email drafts, audit CRM data, and prepare daily outreach lists without sending bulk email automatically.",
+    "developerName": "Local Freelance Workspace",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Local Files"
+    ],
+    "defaultPrompt": [
+      "Prepare today's outreach list from my CRM.",
+      "Draft first-contact emails for qualified leads.",
+      "Audit my freelance outreach CRM."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Email Drafter"
+  short_description: "Write safe outreach email drafts"
+  default_prompt: "Use $email-drafter to draft emails for qualified leads."
+
+policy:
+  allow_implicit_invocation: true

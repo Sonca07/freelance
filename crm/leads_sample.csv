@@ -1,0 +1,6 @@
+lead_id,negocio,rubro,barrio,email,fuente_publica,web_redes,score,dolor_detectado,estado,ultimo_contacto,proximo_followup,baja,respuesta,notas
+L-0001,Aura Belleza,estetica,Palermo,contacto@aurabelleza.example,Perfil publico ficticio,https://instagram.com/aura-belleza,,turnos por WhatsApp sin agenda visible,Calificado,,,,,FICTICIO - reemplazar por lead real
+L-0002,Corte Norte Barber,barberia,Belgrano,hola@cortenorte.example,Web publica ficticia,https://cortenorte.example,,no muestra horarios ni reserva online,Calificado,,,,,FICTICIO - reemplazar por lead real
+L-0003,Pilates Sur,pilates,Avellaneda,info@pilatessur.example,Directorio publico ficticio,https://instagram.com/pilates-sur,,consultas de cupos por mensaje,Enviado,2026-05-13,,,Sin respuesta aun,FICTICIO - reemplazar por lead real
+L-0004,Dra Sonrisas,consultorio odontologico,Caballito,turnos@drasonrisas.example,Web publica ficticia,https://drasonrisas.example,,formulario largo y sin confirmacion clara,Follow-up 1,2026-05-08,,,Pidio mas informacion,FICTICIO - reemplazar por lead real
+L-0005,Manos Lindas,unas,Recoleta,contacto@manoslindas.example,Perfil publico ficticio,https://instagram.com/manos-lindas,0,agenda por DM,No contactar,,,si,,FICTICIO - lead bloqueado para pruebas

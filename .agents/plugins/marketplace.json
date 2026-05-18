@@ -1,0 +1,20 @@
+{
+  "name": "freelance-local",
+  "interface": {
+    "displayName": "Freelance Local Tools"
+  },
+  "plugins": [
+    {
+      "name": "freelance-outreach-assistant",
+      "source": {
+        "source": "local",
+        "path": "./plugins/freelance-outreach-assistant"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

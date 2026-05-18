@@ -1,0 +1,7 @@
+interface:
+  display_name: "Daily Outreach"
+  short_description: "Build safe daily outreach batches"
+  default_prompt: "Use $daily-outreach to prepare today's lead batch."
+
+policy:
+  allow_implicit_invocation: true

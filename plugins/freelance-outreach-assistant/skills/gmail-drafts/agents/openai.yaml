@@ -1,0 +1,7 @@
+interface:
+  display_name: "Gmail Drafts"
+  short_description: "Prepare Gmail-safe draft artifacts"
+  default_prompt: "Use $gmail-drafts to prepare Gmail draft files."
+
+policy:
+  allow_implicit_invocation: true

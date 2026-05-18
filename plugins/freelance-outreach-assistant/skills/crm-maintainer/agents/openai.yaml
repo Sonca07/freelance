@@ -1,0 +1,7 @@
+interface:
+  display_name: "CRM Maintainer"
+  short_description: "Audit outreach CRM and follow-ups"
+  default_prompt: "Use $crm-maintainer to audit my lead CRM."
+
+policy:
+  allow_implicit_invocation: true
