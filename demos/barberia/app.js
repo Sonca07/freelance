@@ -201,7 +201,7 @@ function setupBooking() {
     const barber = getSelectedBarber();
     const day = getSelectedDay();
     showToast(
-      `Reserva demo: ${service.name} con ${barber.name}, ${day.label} a las ${selectedTime}.`,
+      `Reserva demo confirmada: ${service.name} con ${barber.name}, ${day.label} a las ${selectedTime}.`,
     );
   });
 

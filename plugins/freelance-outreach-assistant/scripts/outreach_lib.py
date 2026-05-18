@@ -47,19 +47,19 @@ BLOCKING_BAJA_VALUES = {"1", "si", "yes", "true", "baja", "no contactar", "unsub
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 DEFAULT_CONFIG = {
-    "sender_name": "Tu Nombre",
-    "sender_email": "tu.freelance@gmail.com",
-    "brand_name": "Reservas Online Freelance",
+    "sender_name": "Nexora",
+    "sender_email": "hola@nexora.example",
+    "brand_name": "Nexora",
     "calendar_link": "",
-    "default_demo_link": "https://example.com/demo-reservas",
+    "default_demo_link": "https://sonca07.github.io/freelance/",
     "demo_links": {
         "estetica": "https://example.com/demo-estetica",
-        "barberia": "https://example.com/demo-barberia",
+        "barberia": "https://sonca07.github.io/freelance/",
         "fitness": "https://example.com/demo-fitness",
         "consultorio": "https://example.com/demo-consultorio",
-        "general": "https://example.com/demo-reservas",
+        "general": "https://sonca07.github.io/freelance/",
     },
-    "signature": "Tu Nombre\nDesarrollo web freelance\nGmail: tu.freelance@gmail.com",
+    "signature": "Nexora\nSoftware simple para operar mejor\nEmail: hola@nexora.example",
     "unsubscribe_line": "Si no corresponde, decime y no vuelvo a contactarte.",
 }
 

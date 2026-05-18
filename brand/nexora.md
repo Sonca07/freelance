@@ -23,6 +23,7 @@ No se presenta como una agencia de paginas web. Se presenta como una capa operat
 - Automatizacion practica para negocios reales.
 - Sistemas livianos para vender, reservar y dar seguimiento.
 - De procesos sueltos a operaciones claras.
+- Para barberias: menos mensajes, mas turnos claros.
 
 ## Identidad minima
 
@@ -32,6 +33,7 @@ No se presenta como una agencia de paginas web. Se presenta como una capa operat
 - Tono: claro, sobrio, directo y cercano a negocios locales.
 - Rubro inicial de salida: barberias con agenda por WhatsApp, DM o telefono.
 - Firma base: Nexora | Software simple para operar mejor.
+- CTA inicial: Quiero una demo para mi barberia.
 
 ## Posibles lineas de producto
 
