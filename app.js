@@ -1,14 +1,22 @@
 const defaultState = {
-  businessName: "Barberia Modelo",
-  district: "Palermo",
-  tagline: "Reservas claras para cortes, barba y perfilado sin tanto ida y vuelta por mensaje.",
+  businessName: "Esquina Barber",
+  district: "Boedo",
+  tagline: "Cortes de barrio, turnos al toque y agenda sin vueltas.",
   whatsapp: "+54 9 11 2345 6789",
-  theme: "verde",
+  theme: "barrio",
   font: "sans",
-  layout: "split",
+  layout: "poster",
 };
 
 const presets = {
+  barrio: {
+    businessName: "Esquina Barber",
+    district: "Boedo",
+    tagline: "Cortes de barrio, turnos al toque y agenda sin vueltas.",
+    theme: "barrio",
+    font: "sans",
+    layout: "poster",
+  },
   clasica: {
     businessName: "Barberia Modelo",
     district: "Palermo",
@@ -329,10 +337,10 @@ function clearLogoImage() {
 
 function setupBuilder() {
   elements.businessName.addEventListener("input", (event) => {
-    applyState({ businessName: event.target.value || "Barberia Modelo" });
+    applyState({ businessName: event.target.value || defaultState.businessName });
   });
   elements.district.addEventListener("input", (event) => {
-    applyState({ district: event.target.value || "Palermo" });
+    applyState({ district: event.target.value || defaultState.district });
   });
   elements.tagline.addEventListener("input", (event) => {
     applyState({ tagline: event.target.value || defaultState.tagline });
@@ -371,7 +379,7 @@ function setupBuilder() {
     elements.backgroundImage.value = "";
     clearLogoImage();
     document.querySelectorAll("[data-preset]").forEach((option) => option.classList.remove("is-active"));
-    document.querySelector('[data-preset="clasica"]').classList.add("is-active");
+    document.querySelector('[data-preset="barrio"]').classList.add("is-active");
     applyState(defaultState, false);
     showToast("Identidad restablecida.");
   });
@@ -390,6 +398,52 @@ function setupBuilder() {
       showToast(summaryText);
     }
   });
+}
+
+function getAnchorTarget(hash) {
+  if (!hash || hash === "#") return null;
+  try {
+    return document.querySelector(hash);
+  } catch {
+    return null;
+  }
+}
+
+function scrollToAnchor(hash, behavior = "smooth") {
+  const target = getAnchorTarget(hash);
+  if (!target) return false;
+  const topbar = document.querySelector(".topbar");
+  const offset = (topbar ? topbar.offsetHeight : 0) + 14;
+  const targetTop = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, targetTop), behavior });
+  return true;
+}
+
+function setupNavigation() {
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  const navLinks = [...document.querySelectorAll(".nav-links a")];
+  const setActiveLink = (hash) => {
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("href") === hash);
+    });
+  };
+
+  anchorLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const hash = link.getAttribute("href");
+      if (!scrollToAnchor(hash)) return;
+      event.preventDefault();
+      window.history.pushState(null, "", hash);
+      setActiveLink(hash);
+    });
+  });
+
+  if (window.location.hash) {
+    setActiveLink(window.location.hash);
+    window.requestAnimationFrame(() => scrollToAnchor(window.location.hash, "auto"));
+  } else {
+    setActiveLink("#identidad");
+  }
 }
 
 function setupBooking() {
@@ -431,5 +485,6 @@ renderServices();
 renderSchedule();
 setupBooking();
 setupBuilder();
+setupNavigation();
 syncInputs();
 updatePreview();

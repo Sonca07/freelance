@@ -3,42 +3,44 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barberia Modelo | Nexora</title>
+    <title>Esquina Barber | Nexora</title>
     <meta
       name="description"
       content="SPA Nexora para barberias: identidad editable, reservas online y demo comercial interactiva."
     >
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body data-theme="verde" data-font="sans" data-layout="split">
+  <body data-theme="barrio" data-font="sans" data-layout="poster">
     <header class="topbar" aria-label="Navegacion principal">
       <a class="brand" href="#preview" aria-label="Ir al inicio">
         <span class="brand-mark" data-logo-mark aria-hidden="true">BM</span>
         <span>
-          <strong data-business-name>Barberia Modelo</strong>
+          <strong data-business-name>Esquina Barber</strong>
           <small>Nexora Studio</small>
         </span>
       </a>
       <nav class="nav-links" aria-label="Secciones">
         <a href="#identidad">Identidad</a>
+        <a href="#servicios">Servicios</a>
         <a href="#agenda">Agenda</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <a class="topbar-action" href="#identidad">Personalizar</a>
+      <a class="topbar-action" href="#identidad">Armar demo</a>
     </header>
 
     <main class="builder-shell">
       <aside class="builder-panel" id="identidad" aria-labelledby="builder-title">
         <div class="panel-heading">
           <span class="status-dot" aria-hidden="true"></span>
-          <span>Nexora builder</span>
+          <span>Nexora barrio</span>
         </div>
-        <h1 id="builder-title">Armar identidad</h1>
+        <h1 id="builder-title">Armar barberia</h1>
 
         <section class="control-group" aria-labelledby="templates-title">
           <h2 id="templates-title">Plantilla</h2>
           <div class="segmented" role="group" aria-label="Plantillas">
-            <button class="segment is-active" type="button" data-preset="clasica">Clasica</button>
+            <button class="segment is-active" type="button" data-preset="barrio">Barrio</button>
+            <button class="segment" type="button" data-preset="clasica">Clasica</button>
             <button class="segment" type="button" data-preset="urbana">Urbana</button>
             <button class="segment" type="button" data-preset="premium">Premium</button>
           </div>
@@ -48,15 +50,15 @@
           <h2 id="identity-title">Datos</h2>
           <label>
             Nombre
-            <input id="business-name" type="text" value="Barberia Modelo" maxlength="34">
+            <input id="business-name" type="text" value="Esquina Barber" maxlength="34">
           </label>
           <label>
             Barrio
-            <input id="district" type="text" value="Palermo" maxlength="30">
+            <input id="district" type="text" value="Boedo" maxlength="30">
           </label>
           <label>
             Frase
-            <textarea id="tagline" rows="3" maxlength="140">Reservas claras para cortes, barba y perfilado sin tanto ida y vuelta por mensaje.</textarea>
+            <textarea id="tagline" rows="3" maxlength="140">Cortes de barrio, turnos al toque y agenda sin vueltas.</textarea>
           </label>
           <label>
             WhatsApp
@@ -67,11 +69,14 @@
         <section class="control-group" aria-labelledby="style-title">
           <h2 id="style-title">Estilo</h2>
           <div class="swatches" role="group" aria-label="Paletas">
-            <button class="swatch is-active" type="button" data-theme="verde" aria-label="Verde">
-              <span style="background:#174339"></span>
+            <button class="swatch is-active" type="button" data-theme="barrio" aria-label="Barrio">
+              <span style="background:#f2b705"></span>
             </button>
             <button class="swatch" type="button" data-theme="noir" aria-label="Noir">
               <span style="background:#111111"></span>
+            </button>
+            <button class="swatch" type="button" data-theme="verde" aria-label="Verde">
+              <span style="background:#174339"></span>
             </button>
             <button class="swatch" type="button" data-theme="cobre" aria-label="Cobre">
               <span style="background:#84472d"></span>
@@ -93,6 +98,7 @@
             <label>
               Formato
               <select id="layout-style">
+                <option value="poster">Poster</option>
                 <option value="split">Split</option>
                 <option value="editorial">Editorial</option>
                 <option value="compact">Compacto</option>
@@ -123,18 +129,28 @@
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero-media" id="hero-media" aria-hidden="true"></div>
           <div class="hero-shade" aria-hidden="true"></div>
+          <div class="street-strip" aria-hidden="true">
+            <span>turnos</span>
+            <span>cortes</span>
+            <span>barrio</span>
+            <span>barba</span>
+          </div>
           <div class="hero-content">
             <div class="hero-copy">
-              <p class="eyebrow" id="hero-eyebrow">Barberia en Palermo</p>
+              <p class="eyebrow" id="hero-eyebrow">Barberia en Boedo</p>
               <div class="profile-row">
                 <span class="profile-image" data-logo-mark aria-hidden="true">BM</span>
-                <span>Agenda activa</span>
+                <span>Agenda del barrio</span>
               </div>
-              <h2 id="hero-title" data-business-name>Barberia Modelo</h2>
+              <h2 id="hero-title" data-business-name>Esquina Barber</h2>
               <p id="hero-tagline">
-                Reservas claras para cortes, barba y perfilado sin tanto ida y
-                vuelta por mensaje.
+                Cortes de barrio, turnos al toque y agenda sin vueltas.
               </p>
+              <div class="hero-proof" aria-label="Resumen comercial">
+                <span>Barrio listo</span>
+                <span>WhatsApp directo</span>
+                <span>Turnos visibles</span>
+              </div>
               <div class="hero-actions">
                 <a class="button primary" href="#agenda">
                   <span aria-hidden="true">+</span>
@@ -188,7 +204,7 @@
         <section class="section services" id="servicios" aria-labelledby="services-title">
           <div class="section-heading">
             <p class="eyebrow">Servicios principales</p>
-            <h2 id="services-title">Una carta simple, clara y editable</h2>
+            <h2 id="services-title">Menu de servicios para reservar en dos toques</h2>
           </div>
           <div class="service-grid" id="service-grid"></div>
         </section>
@@ -196,7 +212,7 @@
         <section class="section operations" aria-labelledby="operations-title">
           <div class="section-heading">
             <p class="eyebrow">Panel operativo</p>
-            <h2 id="operations-title">Turnos visibles para el equipo</h2>
+            <h2 id="operations-title">La agenda del dia sin perder chats</h2>
           </div>
           <div class="ops-layout">
             <div class="schedule-board" id="schedule-board" aria-label="Turnos del dia"></div>
@@ -220,10 +236,10 @@
         <section class="section contact" id="contacto" aria-labelledby="contact-title">
           <div>
             <p class="eyebrow">Contacto</p>
-            <h2 id="contact-title">Quiero esta experiencia para mi barberia</h2>
+            <h2 id="contact-title">Llevemos esta identidad a tu barberia</h2>
             <p>
-              Nexora adapta esta base con servicios, fotos, horarios, botones
-              de WhatsApp y una forma simple de ordenar reservas.
+              Nexora adapta esta base con fotos, servicios, horarios, botones
+              de WhatsApp y una agenda simple para ordenar reservas.
             </p>
           </div>
           <a class="button primary" id="mail-link" href="mailto:nexoratecharg@gmail.com?subject=Quiero%20una%20demo%20para%20mi%20barberia">
