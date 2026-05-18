@@ -2,18 +2,21 @@
 
 ## Estado actual
 
-La demo esta lista para publicarse desde la rama `gh-pages`.
+La demo esta publicada desde la rama `gh-pages`.
 
 URL objetivo:
 
 https://sonca07.github.io/freelance/
 
-## Bloqueo encontrado
+## Verificacion
 
-GitHub API respondio que el plan actual no soporta GitHub Pages para este repositorio. El repo figura como privado, por lo que GitHub Pages no queda disponible con el plan actual.
+- Repo publico.
+- GitHub Pages activo.
+- Fuente: `gh-pages` / `/`.
+- La URL responde `200` y contiene la SPA con builder de identidad.
 
 ## Opciones
 
-- Hacer publico el repo y activar Pages desde `gh-pages` / `/`.
-- Mantener el repo privado y publicar la carpeta `demos/barberia` en Vercel, Netlify o Cloudflare Pages.
-- Crear un repo publico separado solo para demos comerciales.
+- Mantener esta URL como demo comercial inicial.
+- Mas adelante, mover demos a un repo publico separado o a un dominio propio de Nexora.
+- Si se compra dominio, apuntar `demo.nexora...` o similar a GitHub Pages.
