@@ -1,3 +1,40 @@
+const defaultState = {
+  businessName: "Barberia Modelo",
+  district: "Palermo",
+  tagline: "Reservas claras para cortes, barba y perfilado sin tanto ida y vuelta por mensaje.",
+  whatsapp: "+54 9 11 2345 6789",
+  theme: "verde",
+  font: "sans",
+  layout: "split",
+};
+
+const presets = {
+  clasica: {
+    businessName: "Barberia Modelo",
+    district: "Palermo",
+    tagline: "Reservas claras para cortes, barba y perfilado sin tanto ida y vuelta por mensaje.",
+    theme: "verde",
+    font: "sans",
+    layout: "split",
+  },
+  urbana: {
+    businessName: "Distrito Barber",
+    district: "Villa Crespo",
+    tagline: "Cortes frescos, horarios visibles y reserva directa para clientes que quieren resolver rapido.",
+    theme: "noir",
+    font: "mono",
+    layout: "compact",
+  },
+  premium: {
+    businessName: "Navaja Club",
+    district: "Recoleta",
+    tagline: "Una experiencia de barberia cuidada, con agenda simple y servicios claros desde el primer click.",
+    theme: "cobre",
+    font: "serif",
+    layout: "editorial",
+  },
+};
+
 const services = [
   {
     id: "corte",
@@ -62,6 +99,36 @@ const appointments = [
   ["18:20", "Perfilado", "Tomi", "Ocupado"],
 ];
 
+const state = { ...defaultState };
+let selectedTime = "";
+
+const elements = {
+  businessName: document.querySelector("#business-name"),
+  district: document.querySelector("#district"),
+  tagline: document.querySelector("#tagline"),
+  whatsapp: document.querySelector("#whatsapp"),
+  font: document.querySelector("#font-style"),
+  layout: document.querySelector("#layout-style"),
+  profileImage: document.querySelector("#profile-image"),
+  backgroundImage: document.querySelector("#background-image"),
+  logoMarks: document.querySelectorAll("[data-logo-mark]"),
+  businessNameTargets: document.querySelectorAll("[data-business-name]"),
+  heroEyebrow: document.querySelector("#hero-eyebrow"),
+  heroTagline: document.querySelector("#hero-tagline"),
+  heroMedia: document.querySelector("#hero-media"),
+  whatsappLink: document.querySelector("#whatsapp-link"),
+  mailLink: document.querySelector("#mail-link"),
+  serviceSelect: document.querySelector("#service"),
+  barberSelect: document.querySelector("#barber"),
+  daySelect: document.querySelector("#day"),
+  timeGrid: document.querySelector("#time-grid"),
+  summary: document.querySelector("#summary"),
+  form: document.querySelector("#booking-form"),
+  toast: document.querySelector("#toast"),
+  serviceGrid: document.querySelector("#service-grid"),
+  scheduleBoard: document.querySelector("#schedule-board"),
+};
+
 const formatMoney = (value) =>
   new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -69,17 +136,87 @@ const formatMoney = (value) =>
     maximumFractionDigits: 0,
   }).format(value);
 
-const serviceSelect = document.querySelector("#service");
-const barberSelect = document.querySelector("#barber");
-const daySelect = document.querySelector("#day");
-const timeGrid = document.querySelector("#time-grid");
-const summary = document.querySelector("#summary");
-const form = document.querySelector("#booking-form");
-const toast = document.querySelector("#toast");
-const serviceGrid = document.querySelector("#service-grid");
-const scheduleBoard = document.querySelector("#schedule-board");
+function initials(value) {
+  const parts = value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2);
+  return (parts.map((part) => part[0]).join("") || "N").toUpperCase();
+}
 
-let selectedTime = "";
+function cleanPhone(value) {
+  return value.replace(/\D/g, "");
+}
+
+function showToast(message) {
+  elements.toast.textContent = message;
+  elements.toast.classList.add("is-visible");
+  window.setTimeout(() => elements.toast.classList.remove("is-visible"), 4200);
+}
+
+function persistState() {
+  const payload = {
+    businessName: state.businessName,
+    district: state.district,
+    tagline: state.tagline,
+    whatsapp: state.whatsapp,
+    theme: state.theme,
+    font: state.font,
+    layout: state.layout,
+  };
+  localStorage.setItem("nexora-barber-state", JSON.stringify(payload));
+}
+
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("nexora-barber-state") || "{}");
+    Object.assign(state, defaultState, saved);
+  } catch {
+    Object.assign(state, defaultState);
+  }
+}
+
+function syncInputs() {
+  elements.businessName.value = state.businessName;
+  elements.district.value = state.district;
+  elements.tagline.value = state.tagline;
+  elements.whatsapp.value = state.whatsapp;
+  elements.font.value = state.font;
+  elements.layout.value = state.layout;
+  document.querySelectorAll(".swatch[data-theme]").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.theme === state.theme);
+  });
+}
+
+function updatePreview() {
+  document.body.dataset.theme = state.theme;
+  document.body.dataset.font = state.font;
+  document.body.dataset.layout = state.layout;
+  document.title = `${state.businessName} | Nexora`;
+  elements.businessNameTargets.forEach((target) => {
+    target.textContent = state.businessName;
+  });
+  elements.logoMarks.forEach((target) => {
+    if (!target.style.backgroundImage) {
+      target.textContent = initials(state.businessName);
+    }
+  });
+  elements.heroEyebrow.textContent = `Barberia en ${state.district}`;
+  elements.heroTagline.textContent = state.tagline;
+  const phone = cleanPhone(state.whatsapp);
+  elements.whatsappLink.href = phone ? `https://wa.me/${phone}` : "https://wa.me/";
+  const subject = encodeURIComponent(`Quiero una demo para ${state.businessName}`);
+  elements.mailLink.href = `mailto:nexoratecharg@gmail.com?subject=${subject}`;
+  updateSummary();
+}
+
+function applyState(patch, shouldPersist = true) {
+  Object.assign(state, patch);
+  syncInputs();
+  updatePreview();
+  if (shouldPersist) persistState();
+}
 
 function fillSelect(select, items, getLabel) {
   select.innerHTML = items
@@ -88,7 +225,7 @@ function fillSelect(select, items, getLabel) {
 }
 
 function renderServices() {
-  serviceGrid.innerHTML = services
+  elements.serviceGrid.innerHTML = services
     .map(
       (service) => `
         <article class="service-item">
@@ -105,7 +242,7 @@ function renderServices() {
 }
 
 function renderSchedule() {
-  scheduleBoard.innerHTML = appointments
+  elements.scheduleBoard.innerHTML = appointments
     .map(
       ([time, service, barber, status]) => `
         <article class="appointment">
@@ -119,12 +256,12 @@ function renderSchedule() {
 }
 
 function renderTimes() {
-  const day = daySelect.value;
+  const day = elements.daySelect.value;
   const disabled = bookedSlots[day] || [];
   const times = availability[day] || [];
   selectedTime = times.find((time) => !disabled.includes(time)) || "";
 
-  timeGrid.innerHTML = times
+  elements.timeGrid.innerHTML = times
     .map((time) => {
       const isDisabled = disabled.includes(time);
       const isSelected = time === selectedTime;
@@ -146,44 +283,125 @@ function renderTimes() {
 }
 
 function getSelectedService() {
-  return services.find((service) => service.id === serviceSelect.value) || services[0];
+  return services.find((service) => service.id === elements.serviceSelect.value) || services[0];
 }
 
 function getSelectedBarber() {
-  return barbers.find((barber) => barber.id === barberSelect.value) || barbers[0];
+  return barbers.find((barber) => barber.id === elements.barberSelect.value) || barbers[0];
 }
 
 function getSelectedDay() {
-  return days.find((day) => day.id === daySelect.value) || days[0];
+  return days.find((day) => day.id === elements.daySelect.value) || days[0];
 }
 
 function updateSummary() {
+  if (!elements.summary) return;
   const service = getSelectedService();
   const barber = getSelectedBarber();
   const day = getSelectedDay();
-  summary.innerHTML = `
+  elements.summary.innerHTML = `
     <strong>${service.name}</strong> con ${barber.name}<br>
     ${day.label} ${day.date} - ${selectedTime || "elegi horario"} - ${service.duration} min<br>
     Total estimado: ${formatMoney(service.price)}
   `;
 }
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("is-visible");
-  window.setTimeout(() => toast.classList.remove("is-visible"), 4200);
+function readImage(file, onLoad) {
+  if (!file || !file.type.startsWith("image/")) return;
+  const reader = new FileReader();
+  reader.addEventListener("load", () => onLoad(reader.result));
+  reader.readAsDataURL(file);
+}
+
+function setLogoImage(dataUrl) {
+  elements.logoMarks.forEach((target) => {
+    target.style.backgroundImage = `url("${dataUrl}")`;
+    target.textContent = "";
+  });
+}
+
+function clearLogoImage() {
+  elements.logoMarks.forEach((target) => {
+    target.style.backgroundImage = "";
+    target.textContent = initials(state.businessName);
+  });
+}
+
+function setupBuilder() {
+  elements.businessName.addEventListener("input", (event) => {
+    applyState({ businessName: event.target.value || "Barberia Modelo" });
+  });
+  elements.district.addEventListener("input", (event) => {
+    applyState({ district: event.target.value || "Palermo" });
+  });
+  elements.tagline.addEventListener("input", (event) => {
+    applyState({ tagline: event.target.value || defaultState.tagline });
+  });
+  elements.whatsapp.addEventListener("input", (event) => {
+    applyState({ whatsapp: event.target.value });
+  });
+  elements.font.addEventListener("change", (event) => {
+    applyState({ font: event.target.value });
+  });
+  elements.layout.addEventListener("change", (event) => {
+    applyState({ layout: event.target.value });
+  });
+  document.querySelectorAll(".swatch[data-theme]").forEach((button) => {
+    button.addEventListener("click", () => applyState({ theme: button.dataset.theme }));
+  });
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll("[data-preset]").forEach((option) => option.classList.remove("is-active"));
+      button.classList.add("is-active");
+      applyState(presets[button.dataset.preset]);
+    });
+  });
+  elements.profileImage.addEventListener("change", (event) => {
+    readImage(event.target.files[0], setLogoImage);
+  });
+  elements.backgroundImage.addEventListener("change", (event) => {
+    readImage(event.target.files[0], (dataUrl) => {
+      elements.heroMedia.style.backgroundImage = `url("${dataUrl}")`;
+    });
+  });
+  document.querySelector("#reset-builder").addEventListener("click", () => {
+    localStorage.removeItem("nexora-barber-state");
+    elements.heroMedia.style.backgroundImage = "";
+    elements.profileImage.value = "";
+    elements.backgroundImage.value = "";
+    clearLogoImage();
+    document.querySelectorAll("[data-preset]").forEach((option) => option.classList.remove("is-active"));
+    document.querySelector('[data-preset="clasica"]').classList.add("is-active");
+    applyState(defaultState, false);
+    showToast("Identidad restablecida.");
+  });
+  document.querySelector("#copy-summary").addEventListener("click", async () => {
+    const summaryText = [
+      `Barberia: ${state.businessName}`,
+      `Barrio: ${state.district}`,
+      `Frase: ${state.tagline}`,
+      `WhatsApp: ${state.whatsapp}`,
+      `Estilo: ${state.theme} / ${state.font} / ${state.layout}`,
+    ].join("\n");
+    try {
+      await navigator.clipboard.writeText(summaryText);
+      showToast("Resumen copiado.");
+    } catch {
+      showToast(summaryText);
+    }
+  });
 }
 
 function setupBooking() {
-  fillSelect(serviceSelect, services, (service) => `${service.name} - ${formatMoney(service.price)}`);
-  fillSelect(barberSelect, barbers, (barber) => `${barber.name} - ${barber.specialty}`);
-  fillSelect(daySelect, days, (day) => `${day.label} - ${day.date}`);
+  fillSelect(elements.serviceSelect, services, (service) => `${service.name} - ${formatMoney(service.price)}`);
+  fillSelect(elements.barberSelect, barbers, (barber) => `${barber.name} - ${barber.specialty}`);
+  fillSelect(elements.daySelect, days, (day) => `${day.label} - ${day.date}`);
 
-  serviceSelect.addEventListener("change", updateSummary);
-  barberSelect.addEventListener("change", updateSummary);
-  daySelect.addEventListener("change", renderTimes);
+  elements.serviceSelect.addEventListener("change", updateSummary);
+  elements.barberSelect.addEventListener("change", updateSummary);
+  elements.daySelect.addEventListener("change", renderTimes);
 
-  timeGrid.addEventListener("click", (event) => {
+  elements.timeGrid.addEventListener("click", (event) => {
     const button = event.target.closest(".time-option");
     if (!button || button.disabled) return;
     selectedTime = button.dataset.time;
@@ -195,7 +413,7 @@ function setupBooking() {
     updateSummary();
   });
 
-  form.addEventListener("submit", (event) => {
+  elements.form.addEventListener("submit", (event) => {
     event.preventDefault();
     const service = getSelectedService();
     const barber = getSelectedBarber();
@@ -208,6 +426,10 @@ function setupBooking() {
   renderTimes();
 }
 
+loadState();
 renderServices();
 renderSchedule();
 setupBooking();
+setupBuilder();
+syncInputs();
+updatePreview();

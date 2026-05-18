@@ -2,7 +2,7 @@
 
 ## Oferta
 
-Nexora ayuda a barberias a mostrar servicios y recibir reservas online con una pagina simple, sin reemplazar WhatsApp: lo ordena.
+Nexora ayuda a barberias a mostrar servicios y recibir reservas online con una pagina simple, sin reemplazar WhatsApp: lo ordena. La demo ahora permite probar nombre, plantilla, estilo, foto de perfil y fondo para que el negocio se vea mas propio desde el primer contacto.
 
 Demo: https://sonca07.github.io/freelance/
 
@@ -12,7 +12,7 @@ Asunto: Una agenda simple para {{negocio}}
 
 Hola, vi {{fuente_publica}} de {{negocio}} y pense que podria servirles una forma mas clara de recibir turnos.
 
-Arme una demo para barberias: muestra servicios, barberos, horarios disponibles y un flujo de reserva simple.
+Arme una demo para barberias: muestra servicios, barberos, horarios disponibles y un flujo de reserva simple. Tambien permite cambiar nombre, estilo e imagenes para ver como quedaria adaptada a cada local.
 
 Demo: https://sonca07.github.io/freelance/
 
@@ -32,10 +32,10 @@ Asunto: Te dejo la demo para barberias
 
 Hola, vuelvo breve.
 
-Te dejo de nuevo la demo de reservas para barberias:
+Te dejo de nuevo la demo editable de reservas para barberias:
 https://sonca07.github.io/freelance/
 
-Se puede adaptar con sus servicios, fotos, horarios, WhatsApp y una forma simple de ordenar reservas.
+Se puede probar con nombre, estilo, fotos, servicios, horarios, WhatsApp y una forma simple de ordenar reservas.
 
 Si queres, te paso una propuesta de piloto.
 
