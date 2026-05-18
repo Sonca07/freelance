@@ -977,15 +977,15 @@ body[data-theme="barrio"] .metrics span {
 }
 
 .contact {
+  width: 100%;
+  margin: 0;
+  padding-right: max(18px, calc((100% - 1120px) / 2));
+  padding-left: max(18px, calc((100% - 1120px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
-  border-top: 1px solid var(--line);
-}
-
-body[data-theme="barrio"] .contact {
-  border-top: 4px solid var(--brand-strong);
+  background: var(--paper);
 }
 
 .contact p {
@@ -1197,5 +1197,10 @@ body[data-theme="barrio"] .contact {
   .section {
     width: min(520px, calc(100% - 24px));
     padding: 54px 0;
+  }
+
+  .contact {
+    width: 100%;
+    padding: 54px 12px;
   }
 }
