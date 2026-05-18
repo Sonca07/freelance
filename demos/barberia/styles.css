@@ -11,6 +11,7 @@
   --accent-soft: #f1dfc9;
   --good: #1e7a53;
   --shadow: 0 24px 80px rgba(11, 20, 18, 0.22);
+  --radius: 8px;
   --font-main: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
 }
@@ -21,12 +22,19 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+[id] {
+  scroll-margin-top: 88px;
 }
 
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 420px),
+    var(--paper);
   font-family: var(--font-main);
   overflow-x: hidden;
 }
@@ -45,6 +53,25 @@ body[data-theme="cobre"] {
   --brand-strong: #512b1b;
   --accent: #1e5a50;
   --accent-soft: #f5d8c2;
+}
+
+body[data-theme="barrio"] {
+  --paper: #f2efe5;
+  --panel: #fff9ea;
+  --muted: #656055;
+  --brand: #20252b;
+  --brand-strong: #0c0f12;
+  --accent: #f2b705;
+  --accent-soft: #ffe08a;
+  --good: #e85d04;
+  --line: #d8d0bd;
+}
+
+body[data-theme="barrio"] {
+  background:
+    linear-gradient(180deg, rgba(242, 183, 5, 0.16), transparent 390px),
+    repeating-linear-gradient(90deg, rgba(12, 15, 18, 0.035) 0 1px, transparent 1px 36px),
+    var(--paper);
 }
 
 body[data-theme="azul"] {
@@ -75,6 +102,15 @@ textarea {
   font: inherit;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 82%, #fff);
+  outline-offset: 3px;
+}
+
 .topbar {
   position: fixed;
   inset: 0 0 auto 0;
@@ -86,9 +122,14 @@ textarea {
   min-height: 72px;
   padding: 14px clamp(18px, 4vw, 48px);
   color: #fffdf7;
-  background: rgba(13, 24, 22, 0.78);
+  background: color-mix(in srgb, var(--brand-strong) 88%, transparent);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+body[data-theme="barrio"] .topbar {
+  border-bottom: 3px solid var(--accent);
+  box-shadow: 0 14px 30px rgba(12, 15, 18, 0.22);
 }
 
 .brand {
@@ -115,6 +156,13 @@ textarea {
   width: 40px;
   height: 40px;
   border: 1px solid rgba(255, 255, 255, 0.32);
+}
+
+body[data-theme="barrio"] .brand-mark {
+  color: var(--brand-strong);
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(-2deg);
 }
 
 .brand strong,
@@ -145,34 +193,81 @@ textarea {
   font-size: 14px;
 }
 
+.nav-links a {
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-links a::after {
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
 .nav-links a:hover {
+  color: #fff;
+}
+
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.nav-links a.is-active {
   color: #fff;
 }
 
 .topbar-action {
   padding: 10px 14px;
   border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.08);
   font-weight: 800;
 }
 
+body[data-theme="barrio"] .topbar-action {
+  color: var(--brand-strong);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 .builder-shell {
   display: grid;
-  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  grid-template-columns: minmax(310px, 372px) minmax(0, 1fr);
   gap: 0;
-  padding-top: 72px;
+  padding-top: 76px;
 }
 
 .builder-panel {
   position: sticky;
-  top: 72px;
+  top: 76px;
   z-index: 20;
   align-self: start;
-  height: calc(100vh - 72px);
+  height: calc(100vh - 76px);
   overflow: auto;
   padding: 22px;
-  background: #fffdf7;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 253, 247, 0.98)),
+    var(--paper);
   border-right: 1px solid var(--line);
+  scrollbar-gutter: stable;
+}
+
+body[data-theme="barrio"] .builder-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 249, 234, 0.96), rgba(255, 249, 234, 0.98)),
+    repeating-linear-gradient(135deg, rgba(12, 15, 18, 0.045) 0 1px, transparent 1px 18px),
+    var(--paper);
 }
 
 .panel-heading {
@@ -194,8 +289,9 @@ textarea {
 
 .builder-panel h1 {
   margin: 10px 0 22px;
-  font-size: 34px;
+  font-size: 40px;
   line-height: 1;
+  letter-spacing: 0;
 }
 
 .control-group {
@@ -229,7 +325,17 @@ textarea {
   color: var(--ink);
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 textarea {
@@ -241,9 +347,9 @@ textarea {
 
 .segmented {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   border: 1px solid var(--line);
-  border-radius: 7px;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -253,6 +359,7 @@ textarea {
   padding: 0 6px;
   border: 0;
   border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   background: #fff;
   cursor: pointer;
   font-weight: 800;
@@ -265,14 +372,27 @@ textarea {
   border-right: 0;
 }
 
+.segment:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.segment:nth-child(even) {
+  border-right: 0;
+}
+
 .segment.is-active {
   color: #fff;
   background: var(--brand);
 }
 
+body[data-theme="barrio"] .segment.is-active {
+  color: var(--brand-strong);
+  background: var(--accent);
+}
+
 .swatches {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -281,7 +401,7 @@ textarea {
   min-height: 40px;
   padding: 4px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: #fff;
   cursor: pointer;
 }
@@ -289,7 +409,7 @@ textarea {
 .swatch span {
   display: block;
   height: 28px;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .swatch.is-active {
@@ -325,7 +445,7 @@ textarea {
   min-height: 46px;
   padding: 12px 16px;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: var(--radius);
   cursor: pointer;
   font-weight: 900;
   transition:
@@ -347,6 +467,22 @@ textarea {
   background: var(--brand-strong);
 }
 
+body[data-theme="barrio"] .button.primary {
+  color: var(--brand-strong);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+body[data-theme="barrio"] .button.primary:hover {
+  background: var(--accent-soft);
+}
+
+body[data-theme="barrio"] .booking-panel .button.primary {
+  color: #fffdf7;
+  background: var(--brand-strong);
+  border-color: var(--brand-strong);
+}
+
 .button.secondary,
 .button.ghost {
   color: inherit;
@@ -365,13 +501,35 @@ textarea {
 
 .preview-surface {
   min-width: 0;
+  background: var(--paper);
 }
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 76px);
   overflow: hidden;
   color: #fffdf7;
+}
+
+.street-strip {
+  position: absolute;
+  right: -80px;
+  bottom: 46px;
+  z-index: 2;
+  display: none;
+  gap: 16px;
+  padding: 12px 28px;
+  color: var(--brand-strong);
+  background: var(--accent);
+  font-size: 13px;
+  font-weight: 1000;
+  text-transform: uppercase;
+  transform: rotate(-5deg);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+body[data-theme="barrio"] .street-strip {
+  display: flex;
 }
 
 .hero-media {
@@ -391,6 +549,12 @@ textarea {
     linear-gradient(0deg, rgba(9, 14, 13, 0.4), rgba(9, 14, 13, 0));
 }
 
+body[data-theme="barrio"] .hero-shade {
+  background:
+    linear-gradient(90deg, rgba(8, 10, 12, 0.96), rgba(8, 10, 12, 0.7) 52%, rgba(8, 10, 12, 0.18)),
+    repeating-linear-gradient(135deg, rgba(242, 183, 5, 0.16) 0 9px, transparent 9px 24px);
+}
+
 .hero-content {
   position: relative;
   z-index: 1;
@@ -399,7 +563,7 @@ textarea {
   align-items: center;
   gap: clamp(24px, 5vw, 72px);
   width: min(1120px, calc(100% - 36px));
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 76px);
   margin: 0 auto;
   padding: 56px 0;
 }
@@ -408,21 +572,37 @@ textarea {
   max-width: 660px;
 }
 
+body[data-theme="barrio"] .hero-copy {
+  max-width: 720px;
+  padding-left: clamp(16px, 2.6vw, 28px);
+  border-left: 7px solid var(--accent);
+}
+
 .profile-row {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 18px;
-  color: rgba(255, 253, 247, 0.78);
+  color: rgba(255, 253, 247, 0.82);
   font-size: 13px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+body[data-theme="barrio"] .profile-row {
+  color: var(--accent-soft);
 }
 
 .profile-image {
   width: 54px;
   height: 54px;
   border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+body[data-theme="barrio"] .profile-image {
+  color: var(--brand-strong);
+  background-color: var(--accent);
+  border-color: var(--accent);
 }
 
 .eyebrow {
@@ -433,12 +613,22 @@ textarea {
   text-transform: uppercase;
 }
 
-.hero h2 {
+body[data-theme="barrio"] .eyebrow {
+  color: var(--accent);
+}
+
+.hero-copy h2 {
   margin: 0;
   font-size: clamp(56px, 8vw, 104px);
   line-height: 0.92;
   letter-spacing: 0;
+  font-weight: 900;
   overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+body[data-theme="barrio"] .hero-copy h2 {
+  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.32);
 }
 
 .hero-copy p:not(.eyebrow) {
@@ -447,6 +637,35 @@ textarea {
   color: rgba(255, 253, 247, 0.84);
   font-size: 20px;
   line-height: 1.55;
+}
+
+body[data-theme="barrio"] .hero-copy p:not(.eyebrow) {
+  color: rgba(255, 253, 247, 0.9);
+  font-weight: 700;
+}
+
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero-proof span {
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 253, 247, 0.82);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body[data-theme="barrio"] .hero-proof span {
+  color: #111;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .hero-actions {
@@ -473,17 +692,42 @@ body[data-layout="compact"] .hero-content {
   min-height: 720px;
 }
 
-body[data-layout="compact"] .hero h2 {
+body[data-layout="compact"] .hero-copy h2 {
   font-size: clamp(44px, 7vw, 78px);
+}
+
+body[data-layout="poster"] .hero-content {
+  grid-template-columns: minmax(0, 0.95fr) minmax(330px, 390px);
+  align-items: end;
+  padding-bottom: 96px;
+}
+
+body[data-layout="poster"] .hero-copy h2 {
+  max-width: 760px;
+  font-size: clamp(64px, 10vw, 122px);
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+body[data-layout="poster"] .booking-panel {
+  transform: rotate(1deg);
 }
 
 .booking-panel {
   padding: 22px;
   color: var(--ink);
-  background: rgba(255, 253, 247, 0.94);
+  background: rgba(255, 253, 247, 0.96);
   border: 1px solid rgba(255, 253, 247, 0.48);
-  border-radius: 8px;
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+body[data-theme="barrio"] .booking-panel {
+  border: 2px solid var(--accent);
+  box-shadow:
+    10px 10px 0 var(--accent),
+    var(--shadow);
 }
 
 .booking-panel h2 {
@@ -520,7 +764,7 @@ body[data-layout="compact"] .hero h2 {
 .time-option {
   min-height: 40px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius);
   color: var(--ink);
   background: #fff;
   cursor: pointer;
@@ -544,10 +788,15 @@ body[data-layout="compact"] .hero h2 {
   min-height: 66px;
   padding: 12px;
   border: 1px solid #eadccb;
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: #fff8ed;
   color: #4b3422;
   line-height: 1.45;
+}
+
+body[data-theme="barrio"] .summary {
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--brand-strong));
+  background: #fff3c8;
 }
 
 .section {
@@ -581,10 +830,27 @@ body[data-layout="compact"] .hero h2 {
 
 .service-item {
   min-height: 172px;
+  display: flex;
+  flex-direction: column;
   padding: 18px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+body[data-theme="barrio"] .service-item {
+  border: 2px solid rgba(12, 15, 18, 0.76);
+  box-shadow: 6px 6px 0 rgba(12, 15, 18, 0.12);
+}
+
+.service-item:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+  box-shadow: 0 18px 42px rgba(17, 20, 22, 0.08);
 }
 
 .service-item h3 {
@@ -602,8 +868,13 @@ body[data-layout="compact"] .hero h2 {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  margin-top: auto;
   color: var(--brand);
   font-weight: 900;
+}
+
+body[data-theme="barrio"] .service-meta {
+  color: var(--good);
 }
 
 .operations {
@@ -611,6 +882,17 @@ body[data-layout="compact"] .hero h2 {
   padding-right: max(18px, calc((100% - 1120px) / 2));
   padding-left: max(18px, calc((100% - 1120px) / 2));
   background: color-mix(in srgb, var(--paper) 74%, var(--brand) 8%);
+}
+
+body[data-theme="barrio"] .operations {
+  color: #fffdf7;
+  background:
+    linear-gradient(180deg, rgba(242, 183, 5, 0.08), transparent),
+    var(--brand-strong);
+}
+
+body[data-theme="barrio"] .operations .eyebrow {
+  color: var(--accent);
 }
 
 .ops-layout {
@@ -631,7 +913,14 @@ body[data-layout="compact"] .hero h2 {
   padding: 14px;
   border: 1px solid color-mix(in srgb, var(--line) 70%, var(--brand) 20%);
   border-left: 5px solid var(--brand);
-  border-radius: 8px;
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+body[data-theme="barrio"] .appointment {
+  color: var(--ink);
+  border-color: rgba(242, 183, 5, 0.42);
+  border-left-color: var(--accent);
   background: var(--panel);
 }
 
@@ -657,9 +946,15 @@ body[data-layout="compact"] .hero h2 {
 
 .metrics div {
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--brand);
   color: #fffdf7;
+}
+
+body[data-theme="barrio"] .metrics div {
+  color: var(--brand-strong);
+  background: var(--accent);
+  box-shadow: 5px 5px 0 rgba(255, 253, 247, 0.16);
 }
 
 .metrics strong,
@@ -677,11 +972,20 @@ body[data-layout="compact"] .hero h2 {
   color: rgba(255, 253, 247, 0.76);
 }
 
+body[data-theme="barrio"] .metrics span {
+  color: rgba(12, 15, 18, 0.72);
+}
+
 .contact {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
+  border-top: 1px solid var(--line);
+}
+
+body[data-theme="barrio"] .contact {
+  border-top: 4px solid var(--brand-strong);
 }
 
 .contact p {
@@ -697,7 +1001,7 @@ body[data-layout="compact"] .hero h2 {
   z-index: 40;
   max-width: min(420px, calc(100% - 36px));
   padding: 14px 16px;
-  border-radius: 8px;
+  border-radius: var(--radius);
   color: #fff;
   background: var(--brand-strong);
   box-shadow: var(--shadow);
@@ -732,8 +1036,24 @@ body[data-layout="compact"] .hero h2 {
     padding-top: 56px;
   }
 
+  body[data-layout="poster"] .hero-content {
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding-bottom: 56px;
+  }
+
+  body[data-layout="poster"] .booking-panel {
+    transform: none;
+  }
+
   .booking-panel {
     max-width: 560px;
+  }
+
+  body[data-theme="barrio"] .booking-panel {
+    box-shadow:
+      7px 7px 0 var(--accent),
+      var(--shadow);
   }
 
   .service-grid,
@@ -749,6 +1069,14 @@ body[data-layout="compact"] .hero h2 {
 }
 
 @media (max-width: 680px) {
+  html {
+    scroll-padding-top: 76px;
+  }
+
+  [id] {
+    scroll-margin-top: 76px;
+  }
+
   .topbar {
     min-height: 66px;
   }
@@ -767,7 +1095,7 @@ body[data-layout="compact"] .hero h2 {
   }
 
   .builder-shell {
-    padding-top: 66px;
+    padding-top: 70px;
   }
 
   .builder-panel {
@@ -796,6 +1124,10 @@ body[data-layout="compact"] .hero h2 {
     border-bottom: 0;
   }
 
+  .segment:nth-last-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+
   .swatches {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -810,8 +1142,25 @@ body[data-layout="compact"] .hero h2 {
     padding: 36px 0;
   }
 
-  .hero h2 {
+  .hero-copy h2 {
     font-size: 50px;
+  }
+
+  body[data-layout="poster"] .hero-copy h2 {
+    font-size: 54px;
+  }
+
+  .street-strip {
+    display: none;
+  }
+
+  body[data-theme="barrio"] .street-strip {
+    display: none;
+  }
+
+  body[data-theme="barrio"] .hero-copy {
+    padding-left: 14px;
+    border-left-width: 5px;
   }
 
   .hero-copy p:not(.eyebrow) {
