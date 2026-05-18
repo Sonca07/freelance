@@ -1,0 +1,6 @@
+lead_id,negocio,rubro,barrio,email,fuente_publica,web_redes,score,dolor_detectado,estado,ultimo_contacto,proximo_followup,baja,respuesta,notas
+B-0001,Esquina Norte Barber,barberia,Belgrano,hola@esquinanorte.example,Instagram publico ficticio,https://instagram.com/esquina-norte-barber,,no muestra horarios ni reserva online,Calificado,,,,,FICTICIO - reemplazar por lead real
+B-0002,Club Fade Sur,barberia,Avellaneda,turnos@clubfadesur.example,Web publica ficticia,https://clubfadesur.example,,turnos por WhatsApp sin agenda visible,Calificado,,,,,FICTICIO - reemplazar por lead real
+B-0003,Navaja Once,barberia,Balvanera,contacto@navajaonce.example,Perfil publico ficticio,https://instagram.com/navaja-once,,solo recibe consultas por DM,Calificado,,,,,FICTICIO - reemplazar por lead real
+B-0004,Barba y Barrio,barberia,Boedo,info@barbaybarrio.example,Google Business ficticio,https://barbaybarrio.example,,servicios sin precios ni horarios claros,Calificado,,,,,FICTICIO - reemplazar por lead real
+B-0005,Corte Viejo Studio,barberia,Caballito,no-contactar@corteviejo.example,Web publica ficticia,https://corteviejo.example,0,pidio no recibir propuestas,No contactar,,,si,,FICTICIO - lead bloqueado para pruebas

@@ -12,7 +12,7 @@ Asunto: Una agenda simple para {{negocio}}
 
 Hola, vi {{fuente_publica}} de {{negocio}} y pense que podria servirles una forma mas clara de recibir turnos.
 
-Arme una demo para barberias: muestra servicios, barberos, horarios disponibles y un flujo de reserva simple. Tambien permite cambiar nombre, estilo e imagenes para ver como quedaria adaptada a cada local.
+Arme una demo para barberias: muestra servicios, barberos, horarios disponibles y un flujo de reserva simple. Tambien permite abrir un editor visual para probar nombre, estilo e imagenes y ver como quedaria adaptada a cada local.
 
 Demo: https://sonca07.github.io/freelance/
 

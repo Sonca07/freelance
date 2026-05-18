@@ -30,6 +30,14 @@ class OutreachScriptsTest(unittest.TestCase):
         self.assertNotIn("L-0005", ids)
         self.assertIn("L-0001", ids)
 
+    def test_barber_ola0_blocks_no_contact(self) -> None:
+        rows, _ = load_csv(ROOT / "crm" / "barberias_ola0_ficticio.csv")
+        actions = due_actions(rows, dt.date(2026, 5, 18), limit=10)
+        ids = {row["lead_id"] for row in actions}
+        self.assertEqual(len(actions), 4)
+        self.assertNotIn("B-0005", ids)
+        self.assertIn("B-0001", ids)
+
     def test_drafts_are_files_only(self) -> None:
         actions = due_actions(self.rows, dt.date(2026, 5, 18), limit=2)
         config = load_config(ROOT / "crm" / "outreach_config.example.json")
