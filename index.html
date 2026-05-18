@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Corte Norte | Demo Nexora</title>
+    <meta
+      name="description"
+      content="Demo Nexora para barberias: reservas online simples, servicios visibles y confirmacion rapida."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar" aria-label="Navegacion principal">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>
+          <strong>Corte Norte</strong>
+          <small>Demo Nexora</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Secciones">
+        <a href="#servicios">Servicios</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="topbar-action" href="#agenda">Reservar</a>
+    </header>
+
+    <main id="inicio">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">Barberia en Belgrano</p>
+            <h1 id="hero-title">Corte Norte</h1>
+            <p>
+              Reservas claras para cortes, barba y perfilado. Elegi servicio,
+              barbero y horario sin esperar confirmacion por mensaje.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#agenda">
+                <span aria-hidden="true">+</span>
+                Reservar turno
+              </a>
+              <a class="button secondary" href="#servicios">Ver servicios</a>
+            </div>
+          </div>
+
+          <aside class="booking-panel" id="agenda" aria-labelledby="booking-title">
+            <div class="panel-heading">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Agenda online</span>
+            </div>
+            <h2 id="booking-title">Reservar turno</h2>
+
+            <form class="booking-form" id="booking-form">
+              <label>
+                Servicio
+                <select id="service" name="service"></select>
+              </label>
+
+              <label>
+                Barbero
+                <select id="barber" name="barber"></select>
+              </label>
+
+              <label>
+                Dia
+                <select id="day" name="day"></select>
+              </label>
+
+              <fieldset class="time-fieldset">
+                <legend>Horario</legend>
+                <div class="time-grid" id="time-grid"></div>
+              </fieldset>
+
+              <div class="summary" id="summary" aria-live="polite"></div>
+
+              <button class="button primary full" type="submit">
+                <span aria-hidden="true">&#10003;</span>
+                Confirmar reserva
+              </button>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section services" id="servicios" aria-labelledby="services-title">
+        <div class="section-heading">
+          <p class="eyebrow">Servicios principales</p>
+          <h2 id="services-title">Menos mensajes, mas turnos confirmados</h2>
+        </div>
+        <div class="service-grid" id="service-grid"></div>
+      </section>
+
+      <section class="section operations" aria-labelledby="operations-title">
+        <div class="section-heading">
+          <p class="eyebrow">Panel operativo</p>
+          <h2 id="operations-title">Una agenda que el equipo puede leer rapido</h2>
+        </div>
+        <div class="ops-layout">
+          <div class="schedule-board" id="schedule-board" aria-label="Turnos del dia"></div>
+          <div class="metrics">
+            <div>
+              <strong id="metric-slots">18</strong>
+              <span>horarios visibles</span>
+            </div>
+            <div>
+              <strong id="metric-whatsapp">-40%</strong>
+              <span>ida y vuelta estimado</span>
+            </div>
+            <div>
+              <strong>24 h</strong>
+              <span>reservas abiertas</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contacto" aria-labelledby="contact-title">
+        <div>
+          <p class="eyebrow">Contacto</p>
+          <h2 id="contact-title">Listo para adaptar a una barberia real</h2>
+          <p>
+            Esta demo puede conectarse con WhatsApp, Google Calendar, formularios,
+            pagos de sena o un panel administrativo simple.
+          </p>
+        </div>
+        <a class="button primary" href="mailto:nexoratecharg@gmail.com?subject=Demo%20barberia%20Nexora">
+          Contactar a Nexora
+        </a>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
