@@ -24,6 +24,15 @@ No se presenta como una agencia de paginas web. Se presenta como una capa operat
 - Sistemas livianos para vender, reservar y dar seguimiento.
 - De procesos sueltos a operaciones claras.
 
+## Identidad minima
+
+- Nombre visible: Nexora.
+- Tagline corto: Software simple para operar mejor.
+- Descripcion corta: Sistemas livianos para reservas, seguimiento y automatizacion operativa.
+- Tono: claro, sobrio, directo y cercano a negocios locales.
+- Rubro inicial de salida: barberias con agenda por WhatsApp, DM o telefono.
+- Firma base: Nexora | Software simple para operar mejor.
+
 ## Posibles lineas de producto
 
 - Nexora Sites: landings y SPAs para negocios.

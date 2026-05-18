@@ -43,7 +43,7 @@ VALID_STATES = [
 ]
 
 TERMINAL_STATES = {"Ganado", "Perdido", "No contactar"}
-BLOCKING_BAJA_VALUES = {"1", "si", "sí", "yes", "true", "baja", "no contactar", "unsubscribe"}
+BLOCKING_BAJA_VALUES = {"1", "si", "yes", "true", "baja", "no contactar", "unsubscribe"}
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 DEFAULT_CONFIG = {
@@ -171,7 +171,7 @@ def classify_rubro(row: Dict[str, str]) -> str:
     text = norm(" ".join([row.get("rubro", ""), row.get("negocio", ""), row.get("dolor_detectado", "")]))
     if any(word in text for word in ["barber", "barberia", "barbero"]):
         return "barberia"
-    if any(word in text for word in ["estetica", "belleza", "spa", "uñas", "unas", "manicura", "pestañas", "pestanas"]):
+    if any(word in text for word in ["estetica", "belleza", "spa", "unas", "manicura", "pestanas"]):
         return "estetica"
     if any(word in text for word in ["pilates", "yoga", "fitness", "gimnasio", "entrenamiento"]):
         return "fitness"

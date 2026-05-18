@@ -1,7 +1,7 @@
 {
-  "sender_name": "Tu Nombre",
-  "sender_email": "tu.freelance@gmail.com",
-  "brand_name": "Reservas Online Freelance",
+  "sender_name": "Nexora",
+  "sender_email": "hola@nexora.example",
+  "brand_name": "Nexora",
   "calendar_link": "",
   "default_demo_link": "https://example.com/demo-reservas",
   "demo_links": {
@@ -11,6 +11,6 @@
     "consultorio": "https://example.com/demo-consultorio",
     "general": "https://example.com/demo-reservas"
   },
-  "signature": "Tu Nombre\nDesarrollo web freelance\nGmail: tu.freelance@gmail.com",
+  "signature": "Nexora\nSoftware simple para operar mejor\nEmail: hola@nexora.example",
   "unsubscribe_line": "Si no corresponde, decime y no vuelvo a contactarte."
 }
