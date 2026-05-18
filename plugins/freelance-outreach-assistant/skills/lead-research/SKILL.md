@@ -16,9 +16,12 @@ Research only public business information and produce rows that match `../../ref
 5. Write rows to a CRM CSV, then run:
 
 ```powershell
+python plugins\freelance-outreach-assistant\scripts\research_urls.py crm\lead_research_seeds_sample.csv --output outputs\researched_leads.csv --review-output outputs\research_review.csv
 python plugins\freelance-outreach-assistant\scripts\normalize_leads.py crm\leads.csv crm\leads_normalized.csv
 python plugins\freelance-outreach-assistant\scripts\score_leads.py crm\leads_normalized.csv crm\leads_scored.csv
 ```
+
+`research_urls.py` must not fetch Instagram, Facebook, Google Maps, TikTok, or LinkedIn URLs automatically. It should queue those rows for manual review unless the user has already copied a public business email into the seed CSV.
 
 ## Lead Quality Rules
 

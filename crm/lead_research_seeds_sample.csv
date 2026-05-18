@@ -1,0 +1,4 @@
+seed_id,url,negocio,rubro,barrio,email,fuente_publica,dolor_detectado,notas
+S-0001,https://esquinanorte.example,Esquina Norte Barber,barberia,Belgrano,hola@esquinanorte.example,Email publicado manualmente en sitio ficticio,turnos por WhatsApp sin agenda visible,FICTICIO - ejemplo con email validado manualmente
+S-0002,https://www.instagram.com/barberia-ficticia,Barberia Ficticia,barberia,Palermo,,,Instagram publico ficticio para revision manual,No se fetch automaticamente
+S-0003,https://www.google.com/maps/place/barberia-ficticia,Barberia Maps,barberia,Boedo,,,Google Maps ficticio para revision manual,No se fetch automaticamente

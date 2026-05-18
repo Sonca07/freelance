@@ -59,6 +59,32 @@ Ejemplo de dolor:
 
 `turnos por WhatsApp sin agenda visible`
 
+## Semillas revisadas
+
+Para acelerar sin scrapear plataformas sensibles, cargar URLs o datos revisados en:
+
+`crm/lead_research_seeds_sample.csv`
+
+Columnas:
+
+- `seed_id`;
+- `url`;
+- `negocio`;
+- `rubro`;
+- `barrio`;
+- `email`;
+- `fuente_publica`;
+- `dolor_detectado`;
+- `notas`.
+
+Si la URL es Instagram, Facebook, Google Maps, TikTok o LinkedIn, el sistema la manda a revision manual y no la descarga. Si el email fue copiado manualmente desde una fuente publica, se puede completar `email` y `fuente_publica`.
+
+Comando:
+
+```powershell
+python plugins/freelance-outreach-assistant/scripts/research_urls.py crm/lead_research_seeds_sample.csv --output outputs/researched_leads.csv --review-output outputs/research_review.csv
+```
+
 ## Criterio para contactar
 
 Contactar solo si se puede escribir una primera linea honesta:

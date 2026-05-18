@@ -12,6 +12,7 @@ SCRIPTS = ROOT / "plugins" / "freelance-outreach-assistant" / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 from outreach_lib import apply_scores, due_actions, load_config, load_csv, write_drafts  # noqa: E402
+from research_urls import build_lead, is_blocked_platform  # noqa: E402
 
 
 class OutreachScriptsTest(unittest.TestCase):
@@ -46,6 +47,37 @@ class OutreachScriptsTest(unittest.TestCase):
             self.assertTrue(index.exists())
             self.assertGreater(len(list(Path(temp_dir).glob("*.txt"))), 0)
             self.assertGreater(len(list(Path(temp_dir).glob("*.eml"))), 0)
+
+    def test_research_blocks_sensitive_platforms(self) -> None:
+        self.assertTrue(is_blocked_platform("https://www.instagram.com/barberia-demo"))
+        self.assertTrue(is_blocked_platform("https://www.google.com/maps/place/barberia-demo"))
+        self.assertFalse(is_blocked_platform("https://barberia-demo.example/contacto"))
+
+    def test_research_extracts_public_email_from_html(self) -> None:
+        html = """
+        <html>
+          <head><title>Corte Norte Barber | Turnos</title></head>
+          <body>
+            <p>Barberia en Belgrano. Turnos por WhatsApp.</p>
+            <a href="mailto:hola@cortenorte.example">Contacto</a>
+          </body>
+        </html>
+        """
+        lead, reason = build_lead(
+            {
+                "seed_id": "T-0001",
+                "url": "https://cortenorte.example",
+                "rubro": "barberia",
+            },
+            html,
+            "https://cortenorte.example",
+        )
+        self.assertIsNone(reason)
+        self.assertIsNotNone(lead)
+        self.assertEqual(lead["email"], "hola@cortenorte.example")
+        self.assertEqual(lead["negocio"], "Corte Norte Barber")
+        self.assertEqual(lead["barrio"], "Belgrano")
+        self.assertIn("WhatsApp", lead["dolor_detectado"])
 
 
 if __name__ == "__main__":

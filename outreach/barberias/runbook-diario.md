@@ -25,13 +25,21 @@ Resultado esperado:
 
 1. Buscar 10 a 15 barberias por dia.
 2. Usar solo email publicado por el negocio, web oficial, Google Business, Instagram o formulario publico.
-3. Completar `crm/leads.csv`.
-4. Ejecutar scoring y auditoria.
-5. Generar maximo 10 borradores diarios.
-6. Revisar manualmente asunto, fuente publica, dolor detectado y link a demo.
-7. Enviar manualmente desde Gmail.
-8. Registrar `estado`, `ultimo_contacto` y `proximo_followup`.
-9. Si piden baja, marcar `baja=si` y `estado=No contactar`.
+3. Cargar semillas revisadas en `crm/lead_research_seeds_sample.csv` o una copia real.
+4. Convertir semillas a CRM:
+
+```powershell
+python plugins/freelance-outreach-assistant/scripts/research_urls.py crm/lead_research_seeds_sample.csv --output outputs/researched_leads.csv --review-output outputs/research_review.csv
+```
+
+5. Revisar `outputs/research_review.csv`; Instagram/Google quedan para revision manual, no se descargan automaticamente.
+6. Copiar leads aprobados a `crm/leads.csv`.
+7. Ejecutar scoring y auditoria.
+8. Generar maximo 10 borradores diarios.
+9. Revisar manualmente asunto, fuente publica, dolor detectado y link a demo.
+10. Enviar manualmente desde Gmail.
+11. Registrar `estado`, `ultimo_contacto` y `proximo_followup`.
+12. Si piden baja, marcar `baja=si` y `estado=No contactar`.
 
 ## Metricas de ola
 
