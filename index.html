@@ -3,135 +3,234 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barberia Modelo | Demo Nexora</title>
+    <title>Barberia Modelo | Nexora</title>
     <meta
       name="description"
-      content="Demo Nexora para barberias: reservas online simples, servicios visibles y confirmacion rapida."
+      content="SPA Nexora para barberias: identidad editable, reservas online y demo comercial interactiva."
     >
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body data-theme="verde" data-font="sans" data-layout="split">
     <header class="topbar" aria-label="Navegacion principal">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio">
-        <span class="brand-mark" aria-hidden="true">N</span>
+      <a class="brand" href="#preview" aria-label="Ir al inicio">
+        <span class="brand-mark" data-logo-mark aria-hidden="true">BM</span>
         <span>
-          <strong>Barberia Modelo</strong>
-          <small>Demo Nexora</small>
+          <strong data-business-name>Barberia Modelo</strong>
+          <small>Nexora Studio</small>
         </span>
       </a>
       <nav class="nav-links" aria-label="Secciones">
-        <a href="#servicios">Servicios</a>
+        <a href="#identidad">Identidad</a>
         <a href="#agenda">Agenda</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <a class="topbar-action" href="#agenda">Reservar</a>
+      <a class="topbar-action" href="#identidad">Personalizar</a>
     </header>
 
-    <main id="inicio">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true"></div>
-        <div class="hero-shade" aria-hidden="true"></div>
-        <div class="hero-content">
-          <div class="hero-copy">
-            <p class="eyebrow">Demo para barberias</p>
-            <h1 id="hero-title">Barberia Modelo</h1>
+    <main class="builder-shell">
+      <aside class="builder-panel" id="identidad" aria-labelledby="builder-title">
+        <div class="panel-heading">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Nexora builder</span>
+        </div>
+        <h1 id="builder-title">Armar identidad</h1>
+
+        <section class="control-group" aria-labelledby="templates-title">
+          <h2 id="templates-title">Plantilla</h2>
+          <div class="segmented" role="group" aria-label="Plantillas">
+            <button class="segment is-active" type="button" data-preset="clasica">Clasica</button>
+            <button class="segment" type="button" data-preset="urbana">Urbana</button>
+            <button class="segment" type="button" data-preset="premium">Premium</button>
+          </div>
+        </section>
+
+        <section class="control-group" aria-labelledby="identity-title">
+          <h2 id="identity-title">Datos</h2>
+          <label>
+            Nombre
+            <input id="business-name" type="text" value="Barberia Modelo" maxlength="34">
+          </label>
+          <label>
+            Barrio
+            <input id="district" type="text" value="Palermo" maxlength="30">
+          </label>
+          <label>
+            Frase
+            <textarea id="tagline" rows="3" maxlength="140">Reservas claras para cortes, barba y perfilado sin tanto ida y vuelta por mensaje.</textarea>
+          </label>
+          <label>
+            WhatsApp
+            <input id="whatsapp" type="tel" value="+54 9 11 2345 6789" maxlength="24">
+          </label>
+        </section>
+
+        <section class="control-group" aria-labelledby="style-title">
+          <h2 id="style-title">Estilo</h2>
+          <div class="swatches" role="group" aria-label="Paletas">
+            <button class="swatch is-active" type="button" data-theme="verde" aria-label="Verde">
+              <span style="background:#174339"></span>
+            </button>
+            <button class="swatch" type="button" data-theme="noir" aria-label="Noir">
+              <span style="background:#111111"></span>
+            </button>
+            <button class="swatch" type="button" data-theme="cobre" aria-label="Cobre">
+              <span style="background:#84472d"></span>
+            </button>
+            <button class="swatch" type="button" data-theme="azul" aria-label="Azul">
+              <span style="background:#17324a"></span>
+            </button>
+          </div>
+
+          <div class="split-controls">
+            <label>
+              Fuente
+              <select id="font-style">
+                <option value="sans">Moderna</option>
+                <option value="serif">Clasica</option>
+                <option value="mono">Tecnica</option>
+              </select>
+            </label>
+            <label>
+              Formato
+              <select id="layout-style">
+                <option value="split">Split</option>
+                <option value="editorial">Editorial</option>
+                <option value="compact">Compacto</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="control-group" aria-labelledby="images-title">
+          <h2 id="images-title">Imagenes</h2>
+          <label class="file-control">
+            Perfil
+            <input id="profile-image" type="file" accept="image/*">
+          </label>
+          <label class="file-control">
+            Fondo
+            <input id="background-image" type="file" accept="image/*">
+          </label>
+        </section>
+
+        <div class="builder-actions">
+          <button class="button primary" id="copy-summary" type="button">Copiar resumen</button>
+          <button class="button ghost" id="reset-builder" type="button">Restablecer</button>
+        </div>
+      </aside>
+
+      <div class="preview-surface" id="preview">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-media" id="hero-media" aria-hidden="true"></div>
+          <div class="hero-shade" aria-hidden="true"></div>
+          <div class="hero-content">
+            <div class="hero-copy">
+              <p class="eyebrow" id="hero-eyebrow">Barberia en Palermo</p>
+              <div class="profile-row">
+                <span class="profile-image" data-logo-mark aria-hidden="true">BM</span>
+                <span>Agenda activa</span>
+              </div>
+              <h2 id="hero-title" data-business-name>Barberia Modelo</h2>
+              <p id="hero-tagline">
+                Reservas claras para cortes, barba y perfilado sin tanto ida y
+                vuelta por mensaje.
+              </p>
+              <div class="hero-actions">
+                <a class="button primary" href="#agenda">
+                  <span aria-hidden="true">+</span>
+                  Probar reserva
+                </a>
+                <a class="button secondary" id="whatsapp-link" href="https://wa.me/" target="_blank" rel="noreferrer">
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <aside class="booking-panel" id="agenda" aria-labelledby="booking-title">
+              <div class="panel-heading">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Agenda online</span>
+              </div>
+              <h2 id="booking-title">Reservar turno</h2>
+
+              <form class="booking-form" id="booking-form">
+                <label>
+                  Servicio
+                  <select id="service" name="service"></select>
+                </label>
+
+                <label>
+                  Barbero
+                  <select id="barber" name="barber"></select>
+                </label>
+
+                <label>
+                  Dia
+                  <select id="day" name="day"></select>
+                </label>
+
+                <fieldset class="time-fieldset">
+                  <legend>Horario</legend>
+                  <div class="time-grid" id="time-grid"></div>
+                </fieldset>
+
+                <div class="summary" id="summary" aria-live="polite"></div>
+
+                <button class="button primary full" type="submit">
+                  <span aria-hidden="true">&#10003;</span>
+                  Confirmar reserva demo
+                </button>
+              </form>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section services" id="servicios" aria-labelledby="services-title">
+          <div class="section-heading">
+            <p class="eyebrow">Servicios principales</p>
+            <h2 id="services-title">Una carta simple, clara y editable</h2>
+          </div>
+          <div class="service-grid" id="service-grid"></div>
+        </section>
+
+        <section class="section operations" aria-labelledby="operations-title">
+          <div class="section-heading">
+            <p class="eyebrow">Panel operativo</p>
+            <h2 id="operations-title">Turnos visibles para el equipo</h2>
+          </div>
+          <div class="ops-layout">
+            <div class="schedule-board" id="schedule-board" aria-label="Turnos del dia"></div>
+            <div class="metrics">
+              <div>
+                <strong id="metric-slots">18</strong>
+                <span>horarios visibles</span>
+              </div>
+              <div>
+                <strong id="metric-whatsapp">-40%</strong>
+                <span>ida y vuelta estimado</span>
+              </div>
+              <div>
+                <strong>24 h</strong>
+                <span>reservas abiertas</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section contact" id="contacto" aria-labelledby="contact-title">
+          <div>
+            <p class="eyebrow">Contacto</p>
+            <h2 id="contact-title">Quiero esta experiencia para mi barberia</h2>
             <p>
-              Una pagina simple para mostrar servicios, tomar reservas y
-              reducir el ida y vuelta por WhatsApp o mensajes.
+              Nexora adapta esta base con servicios, fotos, horarios, botones
+              de WhatsApp y una forma simple de ordenar reservas.
             </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#agenda">
-                <span aria-hidden="true">+</span>
-                Probar reserva
-              </a>
-              <a class="button secondary" href="#servicios">Ver servicios</a>
-            </div>
           </div>
-
-          <aside class="booking-panel" id="agenda" aria-labelledby="booking-title">
-            <div class="panel-heading">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span>Agenda online</span>
-            </div>
-            <h2 id="booking-title">Reservar turno</h2>
-
-            <form class="booking-form" id="booking-form">
-              <label>
-                Servicio
-                <select id="service" name="service"></select>
-              </label>
-
-              <label>
-                Barbero
-                <select id="barber" name="barber"></select>
-              </label>
-
-              <label>
-                Dia
-                <select id="day" name="day"></select>
-              </label>
-
-              <fieldset class="time-fieldset">
-                <legend>Horario</legend>
-                <div class="time-grid" id="time-grid"></div>
-              </fieldset>
-
-              <div class="summary" id="summary" aria-live="polite"></div>
-
-              <button class="button primary full" type="submit">
-                <span aria-hidden="true">&#10003;</span>
-                Confirmar reserva demo
-              </button>
-            </form>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section services" id="servicios" aria-labelledby="services-title">
-        <div class="section-heading">
-          <p class="eyebrow">Servicios principales</p>
-          <h2 id="services-title">Menos mensajes, mas turnos claros</h2>
-        </div>
-        <div class="service-grid" id="service-grid"></div>
-      </section>
-
-      <section class="section operations" aria-labelledby="operations-title">
-        <div class="section-heading">
-          <p class="eyebrow">Panel operativo</p>
-        <h2 id="operations-title">Una agenda que el equipo puede leer rapido</h2>
-        </div>
-        <div class="ops-layout">
-          <div class="schedule-board" id="schedule-board" aria-label="Turnos del dia"></div>
-          <div class="metrics">
-            <div>
-              <strong id="metric-slots">18</strong>
-              <span>horarios visibles</span>
-            </div>
-            <div>
-              <strong id="metric-whatsapp">-40%</strong>
-              <span>ida y vuelta estimado</span>
-            </div>
-            <div>
-              <strong>24 h</strong>
-              <span>reservas abiertas</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section contact" id="contacto" aria-labelledby="contact-title">
-        <div>
-          <p class="eyebrow">Contacto</p>
-          <h2 id="contact-title">Quiero una demo para mi barberia</h2>
-          <p>
-            Nexora adapta esta base con servicios, fotos, horarios, botones de
-            WhatsApp y una forma simple de ordenar reservas.
-          </p>
-        </div>
-        <a class="button primary" href="mailto:nexoratecharg@gmail.com?subject=Quiero%20una%20demo%20para%20mi%20barberia">
-          Quiero una demo
-        </a>
-      </section>
+          <a class="button primary" id="mail-link" href="mailto:nexoratecharg@gmail.com?subject=Quiero%20una%20demo%20para%20mi%20barberia">
+            Quiero una demo
+          </a>
+        </section>
+      </div>
     </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
