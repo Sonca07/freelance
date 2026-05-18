@@ -135,6 +135,11 @@ const elements = {
   toast: document.querySelector("#toast"),
   serviceGrid: document.querySelector("#service-grid"),
   scheduleBoard: document.querySelector("#schedule-board"),
+  builderPanel: document.querySelector("#identidad"),
+  builderOpenControls: document.querySelectorAll("[data-builder-open]"),
+  builderCloseControls: document.querySelectorAll("[data-builder-close]"),
+  builderToggle: document.querySelector(".builder-toggle"),
+  builderCallout: document.querySelector("[data-builder-callout]"),
 };
 
 const formatMoney = (value) =>
@@ -400,6 +405,48 @@ function setupBuilder() {
   });
 }
 
+function hideBuilderCallout() {
+  document.body.classList.add("builder-callout-hidden");
+  elements.builderCallout.setAttribute("aria-hidden", "true");
+}
+
+function setBuilderOpen(isOpen) {
+  document.body.classList.toggle("builder-open", isOpen);
+  elements.builderPanel.setAttribute("aria-hidden", String(!isOpen));
+  elements.builderOpenControls.forEach((control) => {
+    if (control.hasAttribute("aria-expanded")) {
+      control.setAttribute("aria-expanded", String(isOpen));
+    }
+  });
+  if (isOpen) {
+    hideBuilderCallout();
+  } else if (!document.body.classList.contains("builder-callout-hidden")) {
+    elements.builderCallout.removeAttribute("aria-hidden");
+  }
+}
+
+function setupBuilderDrawer() {
+  const hideCalloutOnScroll = () => {
+    if (window.scrollY > 120) {
+      hideBuilderCallout();
+    }
+  };
+  elements.builderOpenControls.forEach((control) => {
+    control.addEventListener("click", (event) => {
+      event.preventDefault();
+      setBuilderOpen(true);
+    });
+  });
+  elements.builderCloseControls.forEach((control) => {
+    control.addEventListener("click", () => setBuilderOpen(false));
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setBuilderOpen(false);
+  });
+  window.addEventListener("scroll", hideCalloutOnScroll, { passive: true });
+  hideCalloutOnScroll();
+}
+
 function getAnchorTarget(hash) {
   if (!hash || hash === "#") return null;
   try {
@@ -431,6 +478,13 @@ function setupNavigation() {
   anchorLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       const hash = link.getAttribute("href");
+      if (hash === "#identidad") {
+        event.preventDefault();
+        setBuilderOpen(true);
+        setActiveLink(hash);
+        window.history.pushState(null, "", hash);
+        return;
+      }
       if (!scrollToAnchor(hash)) return;
       event.preventDefault();
       window.history.pushState(null, "", hash);
@@ -438,8 +492,12 @@ function setupNavigation() {
     });
   });
 
-  if (window.location.hash) {
+  if (window.location.hash === "#identidad") {
     setActiveLink(window.location.hash);
+    setBuilderOpen(true);
+  } else if (window.location.hash) {
+    setActiveLink(window.location.hash);
+    hideBuilderCallout();
     window.requestAnimationFrame(() => scrollToAnchor(window.location.hash, "auto"));
   } else {
     setActiveLink("#identidad");
@@ -486,5 +544,6 @@ renderSchedule();
 setupBooking();
 setupBuilder();
 setupNavigation();
+setupBuilderDrawer();
 syncInputs();
 updatePreview();

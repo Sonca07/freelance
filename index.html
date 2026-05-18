@@ -8,7 +8,7 @@
       name="description"
       content="SPA Nexora para barberias: identidad editable, reservas online y demo comercial interactiva."
     >
-    <link rel="stylesheet" href="styles.css?v=20260518b">
+    <link rel="stylesheet" href="styles.css?v=20260518c">
   </head>
   <body data-theme="barrio" data-font="sans" data-layout="poster">
     <header class="topbar" aria-label="Navegacion principal">
@@ -25,16 +25,21 @@
         <a href="#agenda">Agenda</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <a class="topbar-action" href="#identidad">Armar demo</a>
+      <a class="topbar-action" href="#identidad" data-builder-open>Armar demo</a>
     </header>
 
     <main class="builder-shell">
-      <aside class="builder-panel" id="identidad" aria-labelledby="builder-title">
-        <div class="panel-heading">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span>Nexora barrio</span>
+      <aside class="builder-panel" id="identidad" aria-labelledby="builder-title" aria-hidden="true">
+        <div class="builder-panel-header">
+          <div>
+            <div class="panel-heading">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Nexora barrio</span>
+            </div>
+            <h1 id="builder-title">Armar barberia</h1>
+          </div>
+          <button class="icon-button" type="button" data-builder-close aria-label="Cerrar editor">x</button>
         </div>
-        <h1 id="builder-title">Armar barberia</h1>
 
         <section class="control-group" aria-labelledby="templates-title">
           <h2 id="templates-title">Plantilla</h2>
@@ -124,6 +129,16 @@
           <button class="button ghost" id="reset-builder" type="button">Restablecer</button>
         </div>
       </aside>
+
+      <button class="builder-toggle" type="button" data-builder-open aria-expanded="false" aria-controls="identidad">
+        <span aria-hidden="true">+</span>
+        Personalizar
+      </button>
+      <div class="builder-callout" data-builder-callout>
+        <strong>Tu demo, tu barrio</strong>
+        <button type="button" data-builder-open>Abrir editor</button>
+      </div>
+      <div class="drawer-scrim" data-builder-close aria-hidden="true"></div>
 
       <div class="preview-surface" id="preview">
         <section class="hero" aria-labelledby="hero-title">
@@ -251,6 +266,6 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="app.js?v=20260518b"></script>
+    <script src="app.js?v=20260518c"></script>
   </body>
 </html>
